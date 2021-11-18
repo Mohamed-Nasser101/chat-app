@@ -1,0 +1,46 @@
+<form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()" autocomplete="off" class="p-4" style="background-color:#dde0e7;border-radius:20px">
+  <h2 class="text-center text-primary">Sign up</h2>
+  <hr>
+<!--  <div class="form-group">-->
+<!--    <input type="text" name="username" class="form-control" [(ngModel)]="model.username" placeholder="UserName">-->
+<!--  </div>-->
+
+<!--  <div class="form-group">-->
+<!--    <input formControlName="username" type="text" [class.is-invalid]="registerForm.get('username').errors && registerForm.get('username').touched" class="form-control" placeholder="UserName">-->
+<!--    <div class="invalid-feedback">enter username</div>-->
+<!--  </div>-->
+
+  <div class="form-group">
+    <label style="margin-right: 10px" class="form-label">Iam a:</label>
+    <label class="radio-inline">
+      <input type="radio" value="male" formControlName="gender">Male
+    </label>
+    <label class="radio-inline">
+      <input type="radio" value="female" formControlName="gender" class="ml-3">Female
+    </label>
+  </div>
+
+  <app-text-input [label]='"username"' [formControl]='registerForm.controls["username"]'></app-text-input>
+  <app-text-input [label]='"Known As"' [formControl]="registerForm.controls['knownAs']"></app-text-input>
+  <app-text-input [label]='"City"' [formControl]="registerForm.controls['city']"></app-text-input>
+  <app-text-input [label]='"Country"' [formControl]="registerForm.controls['country']"></app-text-input>
+  <app-date-input [maxDate]="maxDate" [label]='"Date Of Birth"' [formControl]="registerForm.controls['dateOfBirth']"></app-date-input>
+  <app-text-input [label]='"password"' type="password" [formControl]="registerForm.controls['password']"></app-text-input>
+  <app-text-input [label]='"confirmPassword"' type="password" [formControl]="registerForm.controls['confirmPassword']"></app-text-input>
+
+  <div class="row" *ngIf="validationErrors.length > 0">
+    <ul class="text-danger">
+      <li *ngFor="let error of validationErrors">
+        {{error}}
+      </li>
+    </ul>
+  </div>
+
+  <div class="form-group text-center">
+    <button [disabled]="registerForm.invalid" class="btn btn-success mr-2" type="submit">Register</button>
+    <button class="btn btn-outline-secondary btn-default mr-2" (click)="cancel()" type="button">Cacnel</button>
+  </div>
+</form>
+
+<!--<p>value {{ registerForm.value | json }}</p>-->
+<!--<p>status {{ registerForm.status | json }}</p>-->
